@@ -39,7 +39,6 @@ class AllaSpelara: #Överklassen
 class spelare(AllaSpelara): #Här gör vi spelaran med hjälp av överklassen AllaSpelare
     def __init__(self, poäng:int =0, )-> None:
         super().__init__(poäng)
-        self.poäng = poäng
 
     def Ta_kort(self) -> None:
         print(f'din nuvarande poäng är {self.poäng}')
@@ -49,7 +48,7 @@ class spelare(AllaSpelara): #Här gör vi spelaran med hjälp av överklassen Al
                 print(f'du drog ett Ess, vilket värde ska den vara? 1 eller 14')
                 ValFörVärde: int = int(input('välj här: '))
                 if ValFörVärde== 1 or ValFörVärde== 14:
-                    print(f'du valde {ValFörVärde}, vilket ger dig dig {ValFörVärde} poäng')
+                    print(f'du valde {ValFörVärde}, vilket ger dig {ValFörVärde} poäng')
                     self.poäng += ValFörVärde
                     break
                 else:
@@ -57,15 +56,36 @@ class spelare(AllaSpelara): #Här gör vi spelaran med hjälp av överklassen Al
         else:
             print(f'du drog {Randomkort[1]}, vilket ger dig {Randomkort[0]} poäng')
             self.poäng += Randomkort[0]
-    # def DraKort() -> None:
-
+    def poängkoll(self)->None: 
+        print(f'din nuvarande poäng är {self.poäng}')
 
 
 
 
 class dealer(AllaSpelara): #Här gör vi dealer med hjälp av överklassen AllaSpelare
-    def __init__(self, poäng:int, kort:int)-> None:
-        super().__init__(poäng, kort)
+    def __init__(self, poäng:int = 0)-> None:
+        super().__init__(poäng)
+    
+    def Ta_kort(self) -> None:
+            print(f'dealerns nuvarande poäng är {self.poäng}')
+            Randomkort =random.choice(Kortlek)
+            if Randomkort[1] == 'Ess':
+                while True:
+                    print(f'dealer drog ett Ess, dealern väljer värde mellan 1 och 14...')
+                    BotVal=random.randint(1,2)
+                    if BotVal== 1:
+                        print(f'Dealern valde {BotVal}, vilket ger Dealern {BotVal} poäng')
+                        self.poäng += BotVal
+                        break
+                    elif BotVal == 2:
+                        print(f'Dealern valde 14, vilket ger Dealern 14 poäng')
+                        self.poäng += 14
+                        break        
+            else:
+                print(f'Dealern drog {Randomkort[1]}, vilket ger Dealern {Randomkort[0]} poäng')
+                self.poäng += Randomkort[0]
+    def poängkoll(self)->None: 
+        print(f'din nuvarande poäng är {self.poäng}')
 
 
 
@@ -74,13 +94,17 @@ print('...')
 #----------------------------------------------------------------------------------------------------------------------------------------------
 #Här körs spelet
 
-Player1: spelare = spelare()
+# Player1: spelare = spelare()
 
-Player1.Ta_kort()
+# Player1.Ta_kort()
+# Player1.Ta_kort()
+# Player1.poängkoll()
 
+# Dealer1: dealer = dealer()
 
-
-
+# Dealer1.Ta_kort()
+# Dealer1.Ta_kort()
+# Dealer1.poängkoll()
 
 
 
