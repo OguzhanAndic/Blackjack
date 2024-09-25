@@ -12,6 +12,8 @@ Kortlek: tuple = [(1,'1'),(2,'2'),(3,'3'),(4,'4'),(5,'5'),(6,'6'),(7,'7'),(8,'8'
 
 print(Kortlek)
 
+
+
 #----------------------------------------------------------------------------------------------------------------------------------------------
 
 #Här ska klasser först skappas (en överklass för spelet, en för spelare och en för dealer)
@@ -29,16 +31,32 @@ print(Kortlek)
 
 
 class AllaSpelara: #Överklassen
-    def __init__(self, poäng:int, kort:int)-> None:
+    def __init__(self, poäng:int = 0, )-> None:
         self.poäng=poäng
-        self.kort=kort
 
 
 
 class spelare(AllaSpelara): #Här gör vi spelaran med hjälp av överklassen AllaSpelare
-    def __init__(self, poäng:int, kort:int, )-> None:
-        super().__init__(poäng, kort)
+    def __init__(self, poäng:int =0, )-> None:
+        super().__init__(poäng)
+        self.poäng = poäng
 
+    def Ta_kort(self) -> None:
+        print(f'din nuvarande poäng är {self.poäng}')
+        Randomkort =random.choice(Kortlek)
+        if Randomkort[1] == 'Ess':
+            while True:
+                print(f'du drog ett Ess, vilket värde ska den vara? 1 eller 14')
+                ValFörVärde: int = int(input('välj här: '))
+                if ValFörVärde== 1 or ValFörVärde== 14:
+                    print(f'du valde {ValFörVärde}, vilket ger dig dig {ValFörVärde} poäng')
+                    self.poäng += ValFörVärde
+                    break
+                else:
+                    print('du har inte gjort ett kortekt val, välj om!')         
+        else:
+            print(f'du drog {Randomkort[1]}, vilket ger dig {Randomkort[0]} poäng')
+            self.poäng += Randomkort[0]
     # def DraKort() -> None:
 
 
@@ -54,30 +72,56 @@ class dealer(AllaSpelara): #Här gör vi dealer med hjälp av överklassen AllaS
 print('...')
 
 #----------------------------------------------------------------------------------------------------------------------------------------------
+#Här körs spelet
+
+Player1: spelare = spelare()
+
+Player1.Ta_kort()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#----------------------------------------------------------------------------------------------------------------------------------------------
+#Gammalt material som jag inte vill ta bort än
 
 #Temporär plats för att skapa funktioner
-Summa: int= 0
-def Testkort()->None:
-    global Summa
-    Randomkort =random.choice(Kortlek)
-    if Randomkort[1] == 'Ess':
-        while True:
-            print(f'du drog ett Ess, vilket värde ska den vara? 1 eller 14')
-            ValFörVärde: int = int(input('välj här: '))
-            if ValFörVärde== 1 or ValFörVärde== 14:
-                print(f'du valde {ValFörVärde}, vilket ger dig dig {ValFörVärde} poäng')
-                Summa += ValFörVärde
-                break
-            else:
-                print('du har inte gjort ett kortekt val, välj om!')         
-    else:
-        print(f'du drog {Randomkort[1]}, vilket ger dig {Randomkort[0]} poäng')
-        Summa += Randomkort[0]
+# Summa: int= 0
+# def Testkort()->None:
+#     global Summa
+#     Randomkort =random.choice(Kortlek)
+#     if Randomkort[1] == 'Ess':
+#         while True:
+#             print(f'du drog ett Ess, vilket värde ska den vara? 1 eller 14')
+#             ValFörVärde: int = int(input('välj här: '))
+#             if ValFörVärde== 1 or ValFörVärde== 14:
+#                 print(f'du valde {ValFörVärde}, vilket ger dig dig {ValFörVärde} poäng')
+#                 Summa += ValFörVärde
+#                 break
+#             else:
+#                 print('du har inte gjort ett kortekt val, välj om!')         
+#     else:
+#         print(f'du drog {Randomkort[1]}, vilket ger dig {Randomkort[0]} poäng')
+#         Summa += Randomkort[0]
 
 
-Testkort()
-Testkort()
-print('din summa är ', Summa)
+# Testkort()
+# Testkort()
+# print('din summa är ', Summa)
 
 
 
