@@ -19,7 +19,7 @@ class spelare(AllaSpelara): #Här gör vi spelaran med hjälp av överklassen Al
         super().__init__(poäng)
 
     def Ta_kort(self) -> None:
-        print(f'din nuvarande poäng är {self.poäng}')
+        # print(f'din nuvarande poäng är {self.poäng}')
         Randomkort =random.choice(Kortlek)
         if Randomkort[1] == 'Ess':
             while True:
@@ -54,7 +54,7 @@ class spelare(AllaSpelara): #Här gör vi spelaran med hjälp av överklassen Al
                     print('du förlorar automatiskt, du fick mer än 21!')
                     break
             elif Player1Val=='nej':
-                print(f'spelaren stannar, du har totalt {self.poäng}')
+                print(f'spelaren stannar, du har totalt {self.poäng} poäng!')
                 break
             else:
                 print('du måste skriva något av de följande alternativ: ja eller nej . ')
@@ -67,7 +67,7 @@ class dealer(AllaSpelara): #Här gör vi dealer med hjälp av överklassen AllaS
         super().__init__(poäng)
     
     def Ta_kort(self) -> None:
-            print(f'Dealerns nuvarande poäng är {self.poäng}')
+            # print(f'Dealerns nuvarande poäng är {self.poäng}')
             Randomkort =random.choice(Kortlek)
             if Randomkort[1] == 'Ess':
                 while True:
@@ -87,9 +87,12 @@ class dealer(AllaSpelara): #Här gör vi dealer med hjälp av överklassen AllaS
     def poängkoll(self)->None: 
         print(f'Dealerns nuvarande poäng är {self.poäng}')
 
+    def DealernsPoäng(self)->None:
+        print(f'Dealerns nuvarande poäng är {self.poäng}')
+
     def SpelaSpelet(self)->None:
         while True:
-            
+            self.DealernsPoäng()
             if self.poäng <17:
                 self.Ta_kort()
                 continue
@@ -105,6 +108,7 @@ class dealer(AllaSpelara): #Här gör vi dealer med hjälp av överklassen AllaS
 
 
 
+
 print('...')
 
 #----------------------------------------------------------------------------------------------------------------------------------------------
@@ -116,50 +120,93 @@ print('...')
 
 
 
-  
-while True: 
-    Player1: spelare = spelare()
-    Player1.SpelaSpelet()
-    if Player1.poäng > 21:
-        print('Du har förlorat spelet för att du fick 21. Dealern vann!')
-        break
-    Dealer1: dealer = dealer()
-    Dealer1.SpelaSpelet()
-    if Dealer1.poäng > 21:
-        print('Dealern har förlorat spelet för att hen fick 21. Du vann!')
-        break
-    else:
-        if Player1.poäng == Dealer1.poäng:
-            print('Det blev oavgjort')
+# while True:
+#     StartaProgram=input('vill du sätta igång spelet?').lower()
+#     if StartaProgram== 'ja':
+#         print('Startar BlackJack/21')
+#         while True: 
+#             Player1: spelare = spelare()
+#             Player1.SpelaSpelet()
+#             if Player1.poäng > 21:
+#                 print('Du har förlorat spelet för att du fick 21. Dealern vann!')
+#                 break
+#             Dealer1: dealer = dealer()
+#             Dealer1.SpelaSpelet()
+#             if Dealer1.poäng > 21:
+#                 print('Dealern har förlorat spelet för att hen fick 21. Du vann!')
+#                 break
+#             else:
+#                 if Player1.poäng == Dealer1.poäng:
+#                     print('Det blev oavgjort')
+#                     break
+#                 elif Player1.poäng > Dealer1.poäng:
+#                     print('Du fick högre än dealern och vinner!')
+#                     break
+#                 elif Player1.poäng < Dealer1.poäng:
+#                     print('Du fick mindre än dealern och förlorar!')
+#                     break
+#     elif StartaProgram=='nej':
+#         print('Avslutar programmet')
+#         break
+#     else:
+#         print('Ogiltigt svar, Frågar Användare igen!')
+#         continue
+
+
+
+
+
+
+
+def Blackjack()->None:
+    while True: 
+        Player1: spelare = spelare()
+        Player1.SpelaSpelet()
+        if Player1.poäng > 21:
+            print('Du har förlorat spelet för att du fick 21. Dealern vann!')
             break
-        elif Player1.poäng > Dealer1.poäng:
-            print('Du fick högre än dealern och vinner!')
+        Dealer1: dealer = dealer()
+        Dealer1.SpelaSpelet()
+        if Dealer1.poäng > 21:
+            print('Dealern har förlorat spelet för att hen fick över 21 poäng. Du vann!')
             break
-        elif Player1.poäng < Dealer1.poäng:
-            print('Du fick mindre än dealern och förlorar!')
+        else:
+            if Player1.poäng == Dealer1.poäng:
+                print('Datorn vinner, du måste ha mer för att vinna! House allways wins ;) ')
+                break
+            elif Player1.poäng > Dealer1.poäng:
+                print('Du fick högre än dealern och vinner!')
+                break
+            elif Player1.poäng < Dealer1.poäng:
+                print('Du fick mindre än dealern och förlorar!')
+                break
+
+
+def Hela_Programmet()->None:
+    while True:
+        StartaProgram=input('vill du sätta igång spelet? : ').lower()
+        if StartaProgram== 'ja':
+            while True:
+                Blackjack()
+                while True:
+                    ST_eller_FS=input('vill du forästta, svara ja eller nej : ').lower()
+                    if ST_eller_FS=='ja':
+                        print('startar om Blackjack')
+                        break
+                    if ST_eller_FS=='nej':
+                        print('Avslutar programmet')
+                        return
+                    else:
+                        print('Ogiltigt svar, frågar samma fråga igen!')
+                        continue
+        elif StartaProgram=='nej':
+            print('Avslutar programmet')
             break
+        else:
+            print('Ogiltigt svar, frågar användare igen!')
+            continue
 
-# Player1.Ta_kort()
-# Player1.Ta_kort()
-# Player1.poängkoll()
-
-# Dealer1: dealer = dealer()
-
-# Dealer1.Ta_kort()
-# Dealer1.Ta_kort()
-# Dealer1.poängkoll()
-
-
-
-
-
-
-
-
-
-
-
-
+Hela_Programmet()
 
 
 
