@@ -5,10 +5,6 @@ import random #Detta kommer att behövas senare när vi ska börja plocka spelko
 
 Kortlek: tuple = [(1,'1'),(2,'2'),(3,'3'),(4,'4'),(5,'5'),(6,'6'),(7,'7'),(8,'8'),(9,'9'),(11,'Knäckt'),(12,'Drottning'),(13,'Kung'),('Ess','Ess')]
 
-print(Kortlek)
-
-
-
 #----------------------------------------------------------------------------------------------------------------------------------------------
 #Här ska klasser först skappas (en överklass för spelet, en för spelare och en för dealer)
 
@@ -28,15 +24,19 @@ class spelare(AllaSpelara): #Här gör vi spelaran med hjälp av överklassen Al
         if Randomkort[1] == 'Ess':
             while True:
                 print(f'du drog ett Ess, vilket värde ska den vara? 1 eller 14')
-                ValFörEss:str =(input('välj här: '))
-                ValFörVärde: int =ValFörEss
-                if ValFörVärde== 1 or ValFörVärde== 14:
-                    try:
-                        print(f'du valde {ValFörVärde}, vilket ger dig {ValFörVärde} poäng')
-                        self.poäng += ValFörVärde
-                        break
-                    except:
-                        print('du har inte gjort ett kortekt val, välj om!')         
+                ValFörVärde = input('välj här: ')
+                if ValFörVärde== '1':
+                    print(f'du valde {ValFörVärde}, vilket ger dig {ValFörVärde} poäng')
+                    self.poäng += 1
+                    break
+                elif ValFörVärde== '14':
+                    print(f'du valde {ValFörVärde}, vilket ger dig {ValFörVärde} poäng')
+                    self.poäng += 14
+                    break
+                else:  
+                    print('detta är inte okej, gör om')
+                    continue
+                    
         else:
             print(f'du drog {Randomkort[1]}, vilket ger dig {Randomkort[0]} poäng')
             self.poäng += Randomkort[0]
@@ -56,6 +56,9 @@ class spelare(AllaSpelara): #Här gör vi spelaran med hjälp av överklassen Al
             elif Player1Val=='nej':
                 print(f'spelaren stannar, du har totalt {self.poäng}')
                 break
+            else:
+                print('du måste skriva något av de följande alternativ: ja eller nej . ')
+                continue
 
 
 
