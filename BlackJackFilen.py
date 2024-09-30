@@ -1,4 +1,3 @@
-#uplägg
 import random #Detta kommer att behövas senare när vi ska börja plocka spelkort senare så att man får ett slumpmässigt kort 
 
 #----------------------------------------------------------------------------------------------------------------------------------------------
@@ -14,55 +13,54 @@ class AllaSpelara: #Överklassen
 
 
 
-class spelare(AllaSpelara): #Här gör vi spelaran med hjälp av överklassen AllaSpelare
+class Spelare(AllaSpelara): #Här gör vi spelaran med hjälp av överklassen AllaSpelare
     def __init__(self, poäng:int =0 )-> None:
         super().__init__(poäng)
 
     def Ta_kort(self) -> None:
-        # print(f'din nuvarande poäng är {self.poäng}')
         Randomkort =random.choice(Kortlek)
         if Randomkort[1] == 'Ess':
             while True:
-                print(f'du drog ett Ess, vilket värde ska den vara? 1 eller 14')
+                print(f'Du drog ett Ess, vilket värde ska den vara? 1 eller 14')
                 ValFörVärde = input('välj här: ')
                 if ValFörVärde== '1':
-                    print(f'du valde {ValFörVärde}, vilket ger dig {ValFörVärde} poäng')
+                    print(f'Du valde {ValFörVärde}, vilket ger dig {ValFörVärde} poäng')
                     self.poäng += 1
                     break
                 elif ValFörVärde== '14':
-                    print(f'du valde {ValFörVärde}, vilket ger dig {ValFörVärde} poäng')
+                    print(f'Du valde {ValFörVärde}, vilket ger dig {ValFörVärde} poäng')
                     self.poäng += 14
                     break
                 else:  
-                    print('detta är inte okej, gör om')
+                    print('Du måste skriva in ett av de angivna värdena, gör om!')
                     continue
                     
         else:
-            print(f'du drog {Randomkort[1]}, vilket ger dig {Randomkort[0]} poäng')
+            print(f'Du drog {Randomkort[1]}, vilket ger dig {Randomkort[0]} poäng')
             self.poäng += Randomkort[0]
     
     def poängkoll(self)->None: 
-        print(f'din nuvarande poäng är {self.poäng}')
+        print(f'Din nuvarande poäng är {self.poäng}')
     
     def SpelaSpelet(self)->None:
         while True:
             self.poängkoll()
-            Player1Val=input('Vill du göra ett till drag? svara ja eller nej! : ').lower()
+            Player1Val=input('Vill du göra ett till drag? Svara ja eller nej! : ').lower()
             if Player1Val == 'ja':
                 self.Ta_kort()
                 if self.poäng > 21:
-                    print('du förlorar automatiskt, du fick mer än 21!')
+                    print('Du fick mer än 21, du förlorar automatiskt!')
                     break
             elif Player1Val=='nej':
-                print(f'spelaren stannar, du har totalt {self.poäng} poäng!')
+                print(f'Du väljer att stanna, du har totalt {self.poäng} poäng!')
                 break
             else:
-                print('du måste skriva något av de följande alternativ: ja eller nej . ')
+                print('Du måste skriva något av de följande alternativ: ja eller nej. Frågar igen... ')
                 continue
 
 
 
-class dealer(AllaSpelara): #Här gör vi dealer med hjälp av överklassen AllaSpelare
+class Dealer(AllaSpelara): #Här gör vi dealer med hjälp av överklassen AllaSpelare
     def __init__(self, poäng:int = 0)-> None:
         super().__init__(poäng)
     
@@ -96,7 +94,7 @@ class dealer(AllaSpelara): #Här gör vi dealer med hjälp av överklassen AllaS
             if self.poäng <17:
                 self.Ta_kort()
                 continue
-            elif self.poäng >= 17 or self.poäng == 21:
+            elif self.poäng >= 17 and not self.poäng > 21:
                 print('Dealern stannar!')
                 self.poängkoll()
                 break
@@ -107,12 +105,69 @@ class dealer(AllaSpelara): #Här gör vi dealer med hjälp av överklassen AllaS
             break   
 
 
-
-
-print('...')
-
 #----------------------------------------------------------------------------------------------------------------------------------------------
 #Här körs spelet
+
+
+def Blackjack()->None:
+    while True: 
+        Player1: Spelare = Spelare()
+        Player1.SpelaSpelet()
+        if Player1.poäng > 21:
+            print('Du har förlorat spelet för att du fick 21. Dealern vann!')
+            break
+        Dealer1: Dealer = Dealer()
+        Dealer1.SpelaSpelet()
+        if Dealer1.poäng > 21:
+            print('Dealern har förlorat spelet för att hen fick över 21 poäng. Du vann!')
+            break
+        else:
+            if Player1.poäng == Dealer1.poäng:
+                print('Datorn vinner, du måste ha mer för att vinna! House allways wins ;) ')
+                break
+            elif Player1.poäng > Dealer1.poäng:
+                print('Du fick högre än dealern och vinner!')
+                break
+            elif Player1.poäng < Dealer1.poäng:
+                print('Du fick mindre än dealern och förlorar!')
+                break
+
+def LoopaBlackjack():
+    while True:
+        Spela_Eller_Avsluta=input('Vill du spela igen?, svara ja eller nej : ').lower()
+        if Spela_Eller_Avsluta=='ja':
+            print('startar om Blackjack')
+            Blackjack()
+            continue
+        if Spela_Eller_Avsluta=='nej':
+            print('Avslutar programmet')
+            break
+        else:
+            print('Ogiltigt svar, frågar samma fråga igen!')
+        continue
+
+def Hela_Programmet()->None:
+    while True:
+        StartaProgram=input('Vill du sätta igång spelet? : ').lower()
+        if StartaProgram== 'ja':
+            Blackjack()
+            LoopaBlackjack()
+            break
+        elif StartaProgram=='nej':
+            print('Avslutar programmet')
+            break
+        else:
+            print('Ogiltigt svar, frågar användaren igen!')
+            continue
+        
+Hela_Programmet()
+
+
+
+#----------------------------------------------------------------------------------------------------------------------------------------------
+#Gammalt material som jag inte vill ta bort än
+
+
 
 
 
@@ -157,61 +212,6 @@ print('...')
 
 
 
-
-def Blackjack()->None:
-    while True: 
-        Player1: spelare = spelare()
-        Player1.SpelaSpelet()
-        if Player1.poäng > 21:
-            print('Du har förlorat spelet för att du fick 21. Dealern vann!')
-            break
-        Dealer1: dealer = dealer()
-        Dealer1.SpelaSpelet()
-        if Dealer1.poäng > 21:
-            print('Dealern har förlorat spelet för att hen fick över 21 poäng. Du vann!')
-            break
-        else:
-            if Player1.poäng == Dealer1.poäng:
-                print('Datorn vinner, du måste ha mer för att vinna! House allways wins ;) ')
-                break
-            elif Player1.poäng > Dealer1.poäng:
-                print('Du fick högre än dealern och vinner!')
-                break
-            elif Player1.poäng < Dealer1.poäng:
-                print('Du fick mindre än dealern och förlorar!')
-                break
-
-
-def Hela_Programmet()->None:
-    while True:
-        StartaProgram=input('vill du sätta igång spelet? : ').lower()
-        if StartaProgram== 'ja':
-            while True:
-                Blackjack()
-                while True:
-                    ST_eller_FS=input('vill du forästta, svara ja eller nej : ').lower()
-                    if ST_eller_FS=='ja':
-                        print('startar om Blackjack')
-                        break
-                    if ST_eller_FS=='nej':
-                        print('Avslutar programmet')
-                        return
-                    else:
-                        print('Ogiltigt svar, frågar samma fråga igen!')
-                        continue
-        elif StartaProgram=='nej':
-            print('Avslutar programmet')
-            break
-        else:
-            print('Ogiltigt svar, frågar användare igen!')
-            continue
-
-Hela_Programmet()
-
-
-
-#----------------------------------------------------------------------------------------------------------------------------------------------
-#Gammalt material som jag inte vill ta bort än
 
 #Temporär plats för att skapa funktioner
 # Summa: int= 0
