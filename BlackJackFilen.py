@@ -6,7 +6,7 @@ import random
 #Detta kommer att behövas senare när vi ska börja plocka spelkort senare så att man får ett slumpmässigt kort 
 
 
-Kortlek: tuple = [(1,'1'),(2,'2'),(3,'3'),(4,'4'),(5,'5'),(6,'6'),(7,'7'),(8,'8'),(9,'9'),(11,'Knäckt'),(12,'Drottning'),(13,'Kung'),('Ess','Ess')] 
+kortlek: tuple = [(1,'1'),(2,'2'),(3,'3'),(4,'4'),(5,'5'),(6,'6'),(7,'7'),(8,'8'),(9,'9'),(11,'Knäckt'),(12,'Drottning'),(13,'Kung'),('Ess','Ess')] 
 #Här är alla kort som kommer att användas i programmet inuti en tuple. I varje parantes är först värdet av ett kort, och sedan kommer kortets namn. Den enda variabeln som inte har ett värde är Ess. Detta har jag lämnat med flit som en str för att senare ge möjligheten för användaren att göra valet mellan 1 och 14 om de skulle dra Ess.
 
 
@@ -28,9 +28,9 @@ class Spelare(AllaSpelara):
 
     def Ta_kort(self) -> None: 
     #Här är metoden för att spelaren ska kunna ta ett kort från kortleken
-        Randomkort: tuple =random.choice(Kortlek)
+        randomkort: tuple =random.choice(kortlek)
         #Först använder vi random choice från random modulen för att kunna plocka ett slumpmässigt kort för att senare lägga in detta kort i den nya tuplen Randomkort
-        if Randomkort[1] == 'Ess':
+        if randomkort[1] == 'Ess':
         #Nu kommer första if satsen, om du skulle få kortet Ess
             while True:
             #Här startar en loop fram för att spelaren ska vara tvungen att välja ett värde, gör spelaren inte det eller försöker ge ett svar som inte är rimligt så kommer spelaren vara kvar i loopen
@@ -62,9 +62,9 @@ class Spelare(AllaSpelara):
                     #tar spelaren tillbaka till början av loopen, vilket blir att spelaren måste svara på om värdet ska vara 1 eller 14 på ditt Ess
         else:
         #En else sats som gör följande om spelaren inte drog ett Ess
-            print(f'Du drog {Randomkort[1]}, vilket ger dig {Randomkort[0]} poäng')
+            print(f'Du drog {randomkort[1]}, vilket ger dig {randomkort[0]} poäng')
             #en print som visar vilket kort spelaren drog och vad den hadde för värde (notera att namnet på kortet är [1] och värdet är [0])
-            self.poäng += Randomkort[0]
+            self.poäng += randomkort[0]
             #Lägger till kortets värde (Randomkort[0]) in i poängräknaren
     
     def poängkoll(self)->None: 
@@ -114,25 +114,25 @@ class Dealer(AllaSpelara):
     
     def Ta_kort(self) -> None:
     #Här är metoden för att Dealern ska kunna ta ett kort från kortleken
-            Randomkort: tuple = random.choice(Kortlek)
+            randomkort: tuple = random.choice(kortlek)
             #Först använder vi random choice från random modulen för att kunna plocka ett slumpmässigt kort för att senare lägga in detta kort i den nya tuplen Randomkort
-            if Randomkort[1] == 'Ess':
+            if randomkort[1] == 'Ess':
             #Nu kommer första if satsen, om dealern skulle få kortet Ess
                 while True:
                 #Här startar en loop fram för att dealern ska vara tvungen att välja ett värde ifall dealern drar kortet Ess
                     print(f'Dealer drog ett Ess, dealern väljer värde mellan 1 och 14...')
                     #En print som säger att dealern drog ett Ess och ska välja värdet på kortet
-                    BotVal=random.randint(1,2)
+                    botVal=random.randint(1,2)
                     #Här gör Dealern ett val genoma att dra en slumpmässig siffra mellan 1 och 2, för att sedan lagra informationen i Variabeln BotVal1
-                    if BotVal== 1:
+                    if botVal== 1:
                     #En if sats om siffran som valts var 1
-                        print(f'Dealern valde {BotVal}, vilket ger Dealern {BotVal} poäng')
+                        print(f'Dealern valde {botVal}, vilket ger Dealern {botVal} poäng')
                         #En print som säger vad boten valt (1) och hur mycket värdet är 
-                        self.poäng += BotVal
+                        self.poäng += botVal
                         #Lägger in kortets värde i poängräknaren
                         break
                         #bryter sig ur loopen (notera att den bryter inte ut sig ur hela loopen utan endast den loopen som hanterar om dealern får ett Ess)
-                    elif BotVal == 2:
+                    elif botVal == 2:
                     #En if sats om siffran som valts var 2
                         print(f'Dealern valde 14, vilket ger Dealern 14 poäng')
                         #En print som säger vad boten valt (2) och hur mycket värdet
@@ -142,9 +142,9 @@ class Dealer(AllaSpelara):
                         #bryter sig ur loopen (notera att den bryter inte ut sig ur hela loopen utan endast den loopen som hanterar om dealern får ett Ess)      
             else:
             #En else sats som gör följande om dealern får något annat kort än Ess
-                print(f'Dealern drog {Randomkort[1]}, vilket ger Dealern {Randomkort[0]} poäng')
+                print(f'Dealern drog {randomkort[1]}, vilket ger Dealern {randomkort[0]} poäng')
                 #En print som talar om vad dealern drog för kort (Randomkort[1]) och vilket värde den ger (Randomkort[0])
-                self.poäng += Randomkort[0]
+                self.poäng += randomkort[0]
                 #Lägger in det dragna kortets värde i dealerns poängräknare
 
     def DealernsPoäng(self)->None:
@@ -186,21 +186,21 @@ def Blackjack()->None:
 #Här är hela spelupgången upplagd i en def. Detta till skillnad från SpelarenSpelarSpelet och DealerSpelarSpelet är att inte endast låta en person spela utan lägga upp spelaren mot dealern i en runda.
     while True: 
     #Här startar en loop för hela spelgången
-        Player1: Spelare = Spelare()
+        player1: Spelare = Spelare()
         #Först görs objektet för spelaren kopplat till variabeln Player1
-        Player1.SpelareSpelaSpelet()
+        player1.SpelareSpelaSpelet()
         #Här sätts spelet igång för objektet/spelaren
-        if Player1.poäng > 21:
+        if player1.poäng > 21:
         #Här ser jag till att om Spelaren (du) får över 21 poäng att spelet stoppas automatiskt eftersom dealern alltid vinner om du får över 21! Detta genom en if sats om spelaren får mer en 21.
             print('Du har förlorat spelet för att du fick 21. Dealern vann!')
             #En print som talar om att du förlorat
             break
             #En break för att ta dig ur loopen
-        Dealer1: Dealer = Dealer()
+        dealer1: Dealer = Dealer()
         #Här görs obejektet för dealern/boten kopplad till variablen Dealer1
-        Dealer1.DealerSpelarSpelet()
+        dealer1.DealerSpelarSpelet()
         #Spelet sätts igång för dealern
-        if Dealer1.poäng > 21:
+        if dealer1.poäng > 21:
         #Här gör jag en if sats lik den förra, om dealern får över 21 poäng. Då kommer spelaren att vinna eftersom dealern förlorar automatikst om hen får över 21.
             print('Dealern har förlorat spelet för att hen fick över 21 poäng. Du vann!')
             #En print som talar om att dealern har förlorat och att spelaren har vunnit
@@ -208,19 +208,19 @@ def Blackjack()->None:
             #En break för att stänga ner loopen
         else:
         #Här kommer en else sats som kommer att checka varje möjlighet om spelaren och dealern båda stannar innan de fått över 21 poäng
-            if Player1.poäng == Dealer1.poäng:
+            if player1.poäng == dealer1.poäng:
             #If sats som vissar om Spelarens poäng är lika mycket som dealerns
                 print('Datorn vinner, du måste ha mer för att vinna! House allways wins ;) ')
                 #En print som talar om att dattorn har vunnit (detta eftersom reglerna nämner att dealern/huset vinner om du har lika mycket poäng).
                 break
                 #Stänger loopen med en break
-            elif Player1.poäng > Dealer1.poäng:
+            elif player1.poäng > dealer1.poäng:
             #En elif sats som vissar om spelaren har mer poäng än dealern
                 print('Du fick högre än dealern och vinner!')
                 #En print som talar om att spelaren har vunnit eftersom att spelaren har mer poäng än dealern 
                 break
                 #en break som stänger ner loopen
-            elif Player1.poäng < Dealer1.poäng:
+            elif player1.poäng < dealer1.poäng:
             #En sista elif sats som vissar om dealern har mer poäng än spelaren
                 print('Du fick mindre än dealern och förlorar!')
                 #En print som talar om att dealern har vunnit eftersom att dealern har mer poäng än spelaren
@@ -231,9 +231,9 @@ def LoopaBlackjack():
 #Här har jag gjort en till def eftersom att jag vill att man ska kunna spela blackjack/21 igen utan att stänga ner hela programmet.
     while True:
     #En while true för att loopa
-        Spela_Eller_Avsluta=input('Vill du spela igen?, svara ja eller nej : ').lower()
+        spela_Eller_Avsluta=input('Vill du spela igen?, svara ja eller nej : ').lower()
         #En input som frågar om du vill spela igen.
-        if Spela_Eller_Avsluta=='ja':
+        if spela_Eller_Avsluta=='ja':
         #if sats som gör följande om användaren väljer att svara ja på frågan över
             print('startar om Blackjack')
             #Här printas det ut att spelet ska starta om
@@ -241,7 +241,7 @@ def LoopaBlackjack():
             #spelet startar om igen genom att köra blackjack defen
             continue
             #en continue som forsätter att loopen så att användaren får samma fråga igen från början av loopen
-        elif Spela_Eller_Avsluta=='nej':
+        elif spela_Eller_Avsluta=='nej':
         #En elif sats om användaren väljer att svara nej på inputen
             print('Avslutar programmet')
             #En print som talar om att programmet avslutas
@@ -258,9 +258,9 @@ def Hela_Programmet()->None:
 #till sist hela programmet i sin slutliga form genom en def
     while True:
     #Här börjar hela programmet genom en while true loop
-        StartaProgram=input('Vill du sätta igång spelet? Svara ja eller nej : ').lower()
+        startaProgram=input('Vill du sätta igång spelet? Svara ja eller nej : ').lower()
         #Här frågar programmet om användaren ens vill starta spelet genom en input
-        if StartaProgram== 'ja':
+        if startaProgram== 'ja':
         #om användaren svarar ja kommer denna ifsats ge användaren följande 
             Blackjack()
             #här startas blackjack spelet med dens def
@@ -268,7 +268,7 @@ def Hela_Programmet()->None:
             #här frågar spelet genom följande def om användaren vill spela igen, antingen så loopar spelet om användaren svara ja, annars kommer användaren få ett avslutar programmet medelande och forsätta till nästa break.
             break
             #brytter hela loopen med en break som stägner programmet
-        elif StartaProgram=='nej':
+        elif startaProgram=='nej':
         #om användaren väljer att skriva nej i inputen kommer denna elif ge användaren följande 
             print('Avslutar programmet')
             #en print som säger att programmet stängs ner
