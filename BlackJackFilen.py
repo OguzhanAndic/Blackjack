@@ -14,7 +14,7 @@ class AllaSpelara:
 #Här börjar huvudklassen. Det finns två subklasser som kommer att göra olika saker, men båda subklasserna delar en gemensam sak. Båda behöver ha en egen poäng (dvs egna attributs som räknar hur mycket deras värde är från kortleken).
     def __init__(self, poäng:int = 0, )-> None:
     #(här tilldelas attributsen, och retyrtypen None: eftersom att programmet inte ska returnera något till oss)
-        self.poäng=poäng
+        self.poäng = poäng
         #Klassen säger att poäng är klassens egna poäng
 
 
@@ -122,7 +122,7 @@ class Dealer(AllaSpelara):
                 #Här startar en loop fram för att dealern ska vara tvungen att välja ett värde ifall dealern drar kortet Ess
                     print(f'Dealer drog ett Ess, dealern väljer värde mellan 1 och 14...')
                     #En print som säger att dealern drog ett Ess och ska välja värdet på kortet
-                    botVal=random.randint(1,2)
+                    botVal: int = random.randint(1,2)
                     #Här gör Dealern ett val genoma att dra en slumpmässig siffra mellan 1 och 2, för att sedan lagra informationen i Variabeln BotVal1
                     if botVal== 1:
                     #En if sats om siffran som valts var 1
@@ -235,7 +235,7 @@ def LoopaBlackjack():
 #Här har jag gjort en till def eftersom att jag vill att man ska kunna spela blackjack/21 igen utan att stänga ner hela programmet.
     while True:
     #En while true för att loopa
-        spela_Eller_Avsluta=input('\nVill du spela igen?, svara ja eller nej : ').lower()
+        spela_Eller_Avsluta: str =input('\nVill du spela igen?, svara ja eller nej : ').lower()
         #En input som frågar om du vill spela igen.
         if spela_Eller_Avsluta=='ja':
         #if sats som gör följande om användaren väljer att svara ja på frågan över
@@ -262,7 +262,7 @@ def Hela_Programmet()->None:
 #till sist hela programmet i sin slutliga form genom en def
     while True:
     #Här börjar hela programmet genom en while true loop
-        startaProgram=input('Vill du sätta igång spelet? Svara ja eller nej : ').lower()
+        startaProgram: str =input('Vill du sätta igång spelet? Svara ja eller nej : ').lower()
         #Här frågar programmet om användaren ens vill starta spelet genom en input
         if startaProgram== 'ja':
         #om användaren svarar ja kommer denna ifsats ge användaren följande 
